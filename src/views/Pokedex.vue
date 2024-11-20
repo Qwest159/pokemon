@@ -14,9 +14,8 @@ async function fetchPokemonList() {
   let donnees_localstorage = JSON.parse(localStorage.getItem("pokemon"));
   console.log(donnees_localstorage);
 
-  // if (donnees_localstorage !== null || donnees_localstorage[0].id === "1") {
-
-  if (donnees_localstorage !== null) {
+  if (donnees_localstorage !== null && donnees_localstorage[0].id === "1") {
+    // if (donnees_localstorage !== null) {
     console.log("1");
     isLoading.value = false;
     pokemonList.value = donnees_localstorage;
