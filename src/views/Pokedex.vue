@@ -60,7 +60,8 @@ onMounted(() => {
     <div v-else-if="error">Une erreur est survenue : {{ error.message }}</div>
     <ul v-else>
       <li v-for="(pokemon, index) in pokemonList" :key="pokemon.name">
-        <a :href="`/show/${pokemon.id}`">
+        <router-link :to="`/show/${pokemon.id}`">
+          <!-- <a :href="`/show/${pokemon.id}`"> -->
           {{
             pokemon.id < 10
               ? "000" + pokemon.id
@@ -74,7 +75,9 @@ onMounted(() => {
           <img
             :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`"
             :alt="pokemon.name"
-        /></a>
+          />
+          <!-- <\a> -->
+        </router-link>
         <!-- pokemon.names.language == fr language.name -->
       </li>
 
