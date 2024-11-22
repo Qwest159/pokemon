@@ -90,6 +90,10 @@ onMounted(() => {
         :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonList.id}.png`"
         :alt="pokemonList.name"
       />
+      <img
+        :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonList.id}.png`"
+        :alt="pokemonList.name"
+      />
       <!-- pokemon.names.language == fr language.name -->
 
       <!-- <img src="{{pokemon.url}}" alt="" /> -->

@@ -12,7 +12,7 @@ const error = ref(null);
 
 async function fetchPokemonList() {
   let donnees_localstorage = JSON.parse(localStorage.getItem("pokemon"));
-  console.log(donnees_localstorage);
+  // console.log(donnees_localstorage);
 
   if (donnees_localstorage !== null && donnees_localstorage[0].id == "1") {
     // if (donnees_localstorage !== null) {
@@ -60,7 +60,7 @@ onMounted(() => {
     <div v-else-if="error">Une erreur est survenue : {{ error.message }}</div>
     <ul v-else>
       <li v-for="(pokemon, index) in pokemonList" :key="pokemon.name">
-        <router-link :to="`/show/${pokemon.id}`">
+        <router-link :to="`/show/' + ${pokemon.id}`">
           <!-- <a :href="`/show/${pokemon.id}`"> -->
           {{
             pokemon.id < 10
