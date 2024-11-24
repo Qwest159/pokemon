@@ -11,6 +11,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+// ATTENTION ID -1 (met +1 par rapport au lien)
 const pokemon_id = props.id;
 
 let pokemonList = ref([]);
@@ -48,12 +50,30 @@ async function fetchPokemonList() {
 
       // let donnees_localstorage = JSON.parse(localStorage.getItem("pokemon"));
       // console.log(donnees_localstorage[pokemon_id]);
-      console.log(pokemon_id);
+      // console.log(pokemon_id);
+
+      const transformweight = String(data.weight);
+      console.log(transformweight);
+      let new_weight = "";
+      for (let index = 0; index < transformweight.length; index++) {
+        if (
+          transformweight.length - 1 === index &&
+          transformweight.length != 1
+        ) {
+          new_weight += ",";
+        }
+        if (transformweight.length === 1) {
+          new_weight += "0,";
+        }
+        new_weight += transformweight[index];
+      }
+
+      console.log(new_weight);
 
       donnees_localstorage[pokemon_id - 1] = {
         id: pokemon_id,
         name: data.name,
-        weight: data.weight,
+        weight: new_weight,
       };
 
       // console.log(pokemonList.value);

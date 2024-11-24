@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from "vue-router";
     <nav>
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/pokedex">Pokedex</RouterLink>
-      <RouterLink to="/show/2">Pokedex</RouterLink>
+      <!-- <RouterLink to="/show/2">Pokedex</RouterLink> -->
     </nav>
   </div>
 
