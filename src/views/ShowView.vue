@@ -11,7 +11,7 @@ const props = defineProps({
     required: true,
   },
 });
-const pokemon_id = props.id - 1;
+const pokemon_id = props.id;
 
 let pokemonList = ref([]);
 
@@ -22,13 +22,15 @@ async function fetchPokemonList() {
   let donnees_localstorage = JSON.parse(localStorage.getItem("pokemon"));
   // console.log(donnees_localstorage[pokemon_id]);
 
-  if (donnees_localstorage !== null && donnees_localstorage[0].id == "1") {
+  if (
+    donnees_localstorage !== null &&
+    donnees_localstorage[pokemon_id - 1].weight
+  ) {
     // if (donnees_localstorage !== null) {
     console.log("1");
     isLoading.value = false;
-    console.log(donnees_localstorage[pokemon_id]);
 
-    pokemonList.value = donnees_localstorage[pokemon_id];
+    pokemonList.value = donnees_localstorage[pokemon_id - 1];
 
     // console.log(pokemonList);
   } else {
@@ -40,21 +42,25 @@ async function fetchPokemonList() {
       // "https://pokeapi.co/api/v2/pokemon?limit=1025"
 
       const response = await fetch(
-        "https://pokeapi.co/api/v2/pokemon?limit=1025"
+        `https://pokeapi.co/api/v2/pokemon/${pokemon_id}/`
       );
       const data = await response.json();
 
-      //
-      for (let index = 0; index < data.results.length; index++) {
-        pokemonList.value.push({
-          id: index + 1,
-          name: data.results[index].name,
-        });
-      }
+      // let donnees_localstorage = JSON.parse(localStorage.getItem("pokemon"));
+      // console.log(donnees_localstorage[pokemon_id]);
+      console.log(pokemon_id);
 
-      localStorage.setItem("pokemon", JSON.stringify(pokemonList.value));
-      let donnees_localstorage = JSON.parse(localStorage.getItem("pokemon"));
-      pokemonList.value = donnees_localstorage[pokemon_id];
+      donnees_localstorage[pokemon_id - 1] = {
+        id: pokemon_id,
+        name: data.name,
+        weight: data.weight,
+      };
+
+      // console.log(pokemonList.value);
+
+      localStorage.setItem("pokemon", JSON.stringify(donnees_localstorage));
+      pokemonList.value = donnees_localstorage[pokemon_id - 1];
+      // console.log(donnees_localstorage);
     } catch (err) {
       error.value = err;
     } finally {
@@ -86,14 +92,24 @@ onMounted(() => {
       {{
         pokemonList.name
       }}
-      <img
-        :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonList.id}.png`"
-        :alt="pokemonList.name"
-      />
-      <img
-        :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonList.id}.png`"
-        :alt="pokemonList.name"
-      />
+      <div>
+        <h2>Version originale</h2>
+        <img
+          :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonList.id}.png`"
+          :alt="pokemonList.name"
+        />
+      </div>
+      <div>
+        <h2>Version chromatique</h2>
+        <img
+          :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokemonList.id}.png`"
+          :alt="pokemonList.name"
+        />
+      </div>
+      Poids:
+      {{
+        pokemonList.weight
+      }}
       <!-- pokemon.names.language == fr language.name -->
 
       <!-- <img src="{{pokemon.url}}" alt="" /> -->

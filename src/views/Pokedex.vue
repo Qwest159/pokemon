@@ -12,7 +12,7 @@ const error = ref(null);
 
 async function fetchPokemonList() {
   let donnees_localstorage = JSON.parse(localStorage.getItem("pokemon"));
-  // console.log(donnees_localstorage);
+  console.log(donnees_localstorage);
 
   if (donnees_localstorage !== null && donnees_localstorage[0].id == "1") {
     // if (donnees_localstorage !== null) {
@@ -22,13 +22,11 @@ async function fetchPokemonList() {
   } else {
     try {
       console.log("2");
-      // 1) si tu a quelque chose , alors affiche local storage
-      // 2) si tu n'as pas alors recupere de 'API'
-
-      // "https://pokeapi.co/api/v2/pokemon?limit=1025"
 
       const response = await fetch(
-        "https://pokeapi.co/api/v2/pokemon?limit=1025"
+        // "https://pokeapi.co/api/v2/pokemon?limit=1025"
+
+        "https://pokeapi.co/api/v2/pokemon?limit=151"
       );
       const data = await response.json();
 
@@ -41,6 +39,8 @@ async function fetchPokemonList() {
       }
 
       localStorage.setItem("pokemon", JSON.stringify(pokemonList.value));
+      let donnees_localstorage = JSON.parse(localStorage.getItem("pokemon"));
+      pokemonList.value = donnees_localstorage;
     } catch (err) {
       error.value = err;
     } finally {
@@ -60,7 +60,7 @@ onMounted(() => {
     <div v-else-if="error">Une erreur est survenue : {{ error.message }}</div>
     <ul v-else>
       <li v-for="(pokemon, index) in pokemonList" :key="pokemon.name">
-        <router-link :to="`/show/' + ${pokemon.id}`">
+        <router-link :to="`/show/${pokemon.id}`">
           <!-- <a :href="`/show/${pokemon.id}`"> -->
           {{
             pokemon.id < 10
@@ -85,3 +85,21 @@ onMounted(() => {
     </ul>
   </div>
 </template>
+
+<!-- const results = [];
+for (let id = 1; id <= 1025; id++) {
+  const response = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${id}/?limit=1025&offset=0`
+  );
+
+  const data = await response.json();
+
+  console.log(id);
+  console.log(data);
+
+  pokemonList.value.push({
+    id: id,
+    name: data.name,
+    weight: data.weight,
+  });
+} -->
