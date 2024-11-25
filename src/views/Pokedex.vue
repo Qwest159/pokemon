@@ -1,20 +1,28 @@
 <script setup>
 import { ref, onMounted } from "vue";
-
+import { version } from "../version/Version.vue";
 // let count_uptade = 1025
 
 // DOIS FAIRE ATTENTION POUR LA MISE A JOUR => SI LOCAL STORAGE COUNT == COUNT DU donnees_localstorage[0].id === "1"
 
+const version_actuelle = version;
+
 let pokemonList = ref([]);
-let pokemonImageList = ref([]);
+
 const isLoading = ref(true);
 const error = ref(null);
 
 async function fetchPokemonList() {
   let donnees_localstorage = JSON.parse(localStorage.getItem("pokemon"));
-  console.log(donnees_localstorage);
+  let version_localstorage = JSON.parse(localStorage.getItem("version"));
 
-  if (donnees_localstorage !== null && donnees_localstorage[0].id == "1") {
+  // console.log(donnees_localstorage);
+
+  if (
+    donnees_localstorage !== null &&
+    donnees_localstorage[0].id == "1" &&
+    version_localstorage == version_actuelle
+  ) {
     // if (donnees_localstorage !== null) {
     console.log("1");
     isLoading.value = false;
@@ -38,7 +46,9 @@ async function fetchPokemonList() {
         });
       }
 
+      localStorage.setItem("version", JSON.stringify(version_actuelle));
       localStorage.setItem("pokemon", JSON.stringify(pokemonList.value));
+
       let donnees_localstorage = JSON.parse(localStorage.getItem("pokemon"));
       pokemonList.value = donnees_localstorage;
     } catch (err) {

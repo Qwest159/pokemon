@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Pokedex from "../views/Pokedex.vue";
-import Show_pokemonView from "@/views/ShowView.vue";
 import ShowView from "@/views/ShowView.vue";
 
 const router = createRouter({

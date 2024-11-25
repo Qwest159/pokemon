@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps, ref, onMounted } from "vue";
-
+import { version } from "../version/Version.vue";
 // let count_uptade = 1025
 
 // DOIS FAIRE ATTENTION POUR LA MISE A JOUR => SI LOCAL STORAGE COUNT == COUNT DU donnees_localstorage[0].id === "1"
@@ -14,21 +14,23 @@ const props = defineProps({
 
 // ATTENTION ID -1 (met +1 par rapport au lien)
 const pokemon_id = props.id;
+const version_actuelle = version;
+console.log(version_actuelle);
 
 let pokemonList = ref([]);
-
 const isLoading = ref(true);
 const error = ref(null);
 
 async function fetchPokemonList() {
   let donnees_localstorage = JSON.parse(localStorage.getItem("pokemon"));
+  let version_localstorage = JSON.parse(localStorage.getItem("version"));
   // console.log(donnees_localstorage[pokemon_id]);
 
   if (
     donnees_localstorage !== null &&
-    donnees_localstorage[pokemon_id - 1].weight
+    donnees_localstorage[pokemon_id - 1].weight &&
+    version_localstorage == version_actuelle
   ) {
-    // if (donnees_localstorage !== null) {
     console.log("1");
     isLoading.value = false;
 
@@ -55,6 +57,8 @@ async function fetchPokemonList() {
       const transformweight = String(data.weight);
       console.log(transformweight);
       let new_weight = "";
+      console.log(transformweight.length);
+
       for (let index = 0; index < transformweight.length; index++) {
         if (
           transformweight.length - 1 === index &&
@@ -77,6 +81,9 @@ async function fetchPokemonList() {
       };
 
       // console.log(pokemonList.value);
+
+      // DONNEE STORAGE
+      localStorage.setItem("version", JSON.stringify(version_actuelle));
 
       localStorage.setItem("pokemon", JSON.stringify(donnees_localstorage));
       pokemonList.value = donnees_localstorage[pokemon_id - 1];
@@ -130,6 +137,7 @@ onMounted(() => {
       {{
         pokemonList.weight
       }}
+      kg
       <!-- pokemon.names.language == fr language.name -->
 
       <!-- <img src="{{pokemon.url}}" alt="" /> -->
