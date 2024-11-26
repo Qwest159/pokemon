@@ -66,7 +66,7 @@ onMounted(() => {
 <template>
   <h1>Pokedex</h1>
   <div>
-    <div v-if="isLoading">Chargement en cours...</div>
+    <div v-if="isLoading"></div>
     <div v-else-if="error">Une erreur est survenue : {{ error.message }}</div>
     <ul v-else>
       <li v-for="(pokemon, index) in pokemonList" :key="pokemon.name">
