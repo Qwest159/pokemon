@@ -28,63 +28,63 @@ async function fetchPokemonList() {
   let version_localstorage = JSON.parse(localStorage.getItem("version"));
   const typeCouleur = {
     grass: {
-      image: "../../public/image/types/plante.png",
+      image: "/image/types/plante.png",
       couleur: "bg-green-600",
     },
     bug: {
-      image: "../../public/image/types/plante.png",
+      image: "/image/types/plante.png",
       couleur: "bg-green-600",
     },
     fire: {
-      image: "../../public/image/types/feu.png",
+      image: "/image/types/feu.png",
       couleur: "bg-red-600",
     },
     water: {
-      image: "../../public/image/types/eau.png",
+      image: "/image/types/eau.png",
       couleur: "bg-cyan-500",
     },
     ice: {
-      image: "../../public/image/types/eau.png",
+      image: "/image/types/eau.png",
       couleur: "bg-cyan-500",
     },
     fighting: {
-      image: "../../public/image/types/combat.png",
+      image: "/image/types/combat.png",
       couleur: "bg-yellow-700",
     },
     rock: {
-      image: "../../public/image/types/combat.png",
+      image: "/image/types/combat.png",
       couleur: "bg-yellow-700",
     },
     ground: {
-      image: "../../public/image/types/combat.png",
+      image: "/image/types/combat.png",
       couleur: "bg-yellow-700",
     },
     dragon: {
-      image: "../../public/image/types/dragon.png",
+      image: "/image/types/dragon.png",
       couleur: "bg-yellow-600",
     },
     electric: {
-      image: "../../public/image/types/electricite.png",
+      image: "/image/types/electricite.png",
       couleur: "bg-yellow-400",
     },
     metal: {
-      image: "../../public/image/types/metal.png",
+      image: "/image/types/metal.png",
       couleur: "bg-gray-600",
     },
     psychic: {
-      image: "../../public/image/types/psy.png",
+      image: "/image/types/psy.png",
       couleur: "bg-purple-500",
     },
     dark: {
-      image: "../../public/image/types/tenebre.png",
+      image: "/image/types/tenebre.png",
       couleur: "bg-gray-500",
     },
     normal: {
-      image: "../../public/image/types/normal.png",
+      image: "/image/types/normal.png",
       couleur: "bg-gray-300",
     },
     poison: {
-      image: "../../public/image/types/psy.png",
+      image: "/image/types/psy.png",
       couleur: "bg-purple-500",
     },
   };
@@ -191,7 +191,7 @@ onMounted(() => {
   console.log(pokemonType.value);
 });
 
-// ../../public/image/types/plante.png
+// /image/types/plante.png
 </script>
 
 <template>
