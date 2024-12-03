@@ -114,7 +114,7 @@ onMounted(() => {
     <ul v-else class="flex flex-wrap gap-4 justify-evenly">
       <!-- cadre intérieur -->
       <li
-        class="border-2 grid grid-flow-col rounded-lg p-3 w-44 drop-shadow-2xl"
+        class="border-2 grid grid-flow-col rounded-lg p-3 w-44 drop-shadow-2xl hover:border-blue-300"
         v-for="pokemon in pokemonRecherche"
         :key="pokemon.name"
       >
