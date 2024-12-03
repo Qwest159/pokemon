@@ -1,6 +1,8 @@
 <script setup>
 import { defineProps, ref, onMounted } from "vue";
 import { version } from "../version/Version.vue";
+import gen1 from "../stockage/gen1.json";
+
 import TypePokemon from "../components/TypePokemon.vue";
 // let count_uptade = 1025
 
@@ -89,8 +91,6 @@ async function fetchPokemonList() {
     },
   };
 
-  console.log(donnees_localstorage[pokemon_id - 1].type);
-
   // console.log(donnees_localstorage[pokemon_id]);
 
   if (
@@ -113,12 +113,9 @@ async function fetchPokemonList() {
     let ColorType2 =
       typeCouleur[donnees_localstorage[pokemon_id - 1].type[1]]?.couleur;
     couleurBackground = ColorType1 || ColorType2;
-    console.log(couleurBackground);
   } else {
     try {
       console.log("2");
-      // 1) si tu a quelque chose , alors affiche local storage
-      // 2) si tu n'as pas alors recupere de 'API'
 
       // "https://pokeapi.co/api/v2/pokemon?limit=1025"
 
@@ -146,11 +143,10 @@ async function fetchPokemonList() {
         }
         new_weight += transformweight[index];
       }
-      console.log(data.types[0].type.name);
 
       donnees_localstorage[pokemon_id - 1] = {
         id: pokemon_id,
-        name: data.name,
+        name: gen1[pokemon_id - 1].name,
         weight: new_weight,
         type: [data.types[0].type.name, data.types[1]?.type.name].filter(
           Boolean
@@ -176,7 +172,6 @@ async function fetchPokemonList() {
       let ColorType2 =
         typeCouleur[donnees_localstorage[pokemon_id - 1].type[1]]?.couleur;
       couleurBackground = ColorType1 || ColorType2;
-      console.log(couleurBackground);
     } catch (err) {
       error.value = err;
     } finally {
@@ -187,8 +182,6 @@ async function fetchPokemonList() {
 
 onMounted(() => {
   fetchPokemonList();
-
-  console.log(pokemonType.value);
 });
 
 // /image/types/plante.png
